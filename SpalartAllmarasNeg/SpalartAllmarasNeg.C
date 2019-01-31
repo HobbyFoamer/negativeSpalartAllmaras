@@ -1,5 +1,5 @@
 
-#include "SpalartAllmaras.H"
+#include "SpalartAllmarasNeg.H"
 #include "addToRunTimeSelectionTable.H"
 
 #include "backwardsCompatibilityWallFunctions.H"
@@ -15,25 +15,25 @@ namespace RASModels
 
 // * * * * * * * * * * * * * * Static Data Members * * * * * * * * * * * * * //
 
-defineTypeNameAndDebug(SpalartAllmaras, 0);
-addToRunTimeSelectionTable(RASModel, SpalartAllmaras, dictionary);
+defineTypeNameAndDebug(SpalartAllmarasNeg, 0);
+addToRunTimeSelectionTable(RASModel, SpalartAllmarasNeg, dictionary);
 
 // * * * * * * * * * * * * Private Member Functions  * * * * * * * * * * * * //
 
-tmp<volScalarField> SpalartAllmaras::chi() const
+tmp<volScalarField> SpalartAllmarasNeg::chi() const
 {
     return rho_*nuTilda_/mu();
 }
 
 
-tmp<volScalarField> SpalartAllmaras::fv1(const volScalarField& chi) const
+tmp<volScalarField> SpalartAllmarasNeg::fv1(const volScalarField& chi) const
 {
     volScalarField chi3 = pow3(chi);
     return chi3/(chi3 + pow3(Cv1_));
 }
 
 
-tmp<volScalarField> SpalartAllmaras::fv2
+tmp<volScalarField> SpalartAllmarasNeg::fv2
 (
     const volScalarField& chi,
     const volScalarField& fv1
@@ -44,7 +44,7 @@ tmp<volScalarField> SpalartAllmaras::fv2
 }
 
 
-tmp<volScalarField> SpalartAllmaras::fv3
+tmp<volScalarField> SpalartAllmarasNeg::fv3
 (
     const volScalarField& chi,
     const volScalarField& fv1
@@ -60,7 +60,7 @@ tmp<volScalarField> SpalartAllmaras::fv3
 }
 
 
-tmp<volScalarField> SpalartAllmaras::fw(const volScalarField& Stilda) const
+tmp<volScalarField> SpalartAllmarasNeg::fw(const volScalarField& Stilda) const
 {
     volScalarField r = min
     (
@@ -81,7 +81,7 @@ tmp<volScalarField> SpalartAllmaras::fw(const volScalarField& Stilda) const
 
 // * * * * * * * * * * * * * * * * Constructors  * * * * * * * * * * * * * * //
 
-SpalartAllmaras::SpalartAllmaras
+SpalartAllmarasNeg::SpalartAllmarasNeg
 (
     const volScalarField& rho,
     const volVectorField& U,
@@ -271,7 +271,7 @@ SpalartAllmaras::SpalartAllmaras
 
 // * * * * * * * * * * * * * * * Member Functions  * * * * * * * * * * * * * //
 
-tmp<volScalarField> SpalartAllmaras::DnuTildaEff(const volScalarField& chi) const
+tmp<volScalarField> SpalartAllmarasNeg::DnuTildaEff(const volScalarField& chi) const
 {
     volScalarField pow3chi = pow(chi, 3);
     volScalarField fn =
@@ -288,7 +288,7 @@ tmp<volScalarField> SpalartAllmaras::DnuTildaEff(const volScalarField& chi) cons
 }
 
 
-tmp<volSymmTensorField> SpalartAllmaras::R() const
+tmp<volSymmTensorField> SpalartAllmarasNeg::R() const
 {
     return tmp<volSymmTensorField>
     (
@@ -308,7 +308,7 @@ tmp<volSymmTensorField> SpalartAllmaras::R() const
 }
 
 
-tmp<volSymmTensorField> SpalartAllmaras::devRhoReff() const
+tmp<volSymmTensorField> SpalartAllmarasNeg::devRhoReff() const
 {
     return tmp<volSymmTensorField>
     (
@@ -328,7 +328,7 @@ tmp<volSymmTensorField> SpalartAllmaras::devRhoReff() const
 }
 
 
-tmp<fvVectorMatrix> SpalartAllmaras::divDevRhoReff(volVectorField& U) const
+tmp<fvVectorMatrix> SpalartAllmarasNeg::divDevRhoReff(volVectorField& U) const
 {
     volScalarField muEff_ = muEff();
 
@@ -340,7 +340,7 @@ tmp<fvVectorMatrix> SpalartAllmaras::divDevRhoReff(volVectorField& U) const
 }
 
 
-bool SpalartAllmaras::read()
+bool SpalartAllmarasNeg::read()
 {
     if (RASModel::read())
     {
@@ -377,7 +377,7 @@ bool SpalartAllmaras::read()
 }
 
 
-void SpalartAllmaras::correct()
+void SpalartAllmarasNeg::correct()
 {
     // Bound in case of topological change
     // HJ, 22/Aug/2007
