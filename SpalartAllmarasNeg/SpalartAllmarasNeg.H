@@ -19,7 +19,7 @@ Description
 
     Additional model coefficients correspond to the following:
     @verbatim
-        SpalartAllmarasCoeffs
+        SpalartAllmarasNegCoeffs
         {
             StildaModification  false;
             negativeNuTilda     false;
@@ -34,8 +34,8 @@ Description
     foam-extend-3.2 unless you activate the modifications in RASProperties.
 */
 
-#ifndef compressibleSpalartAllmaras_H
-#define compressibleSpalartAllmaras_H
+#ifndef compressibleSpalartAllmarasNeg_H
+#define compressibleSpalartAllmarasNeg_H
 
 #include "RASModel.H"
 #include "wallDist.H"
@@ -50,10 +50,10 @@ namespace RASModels
 {
 
 /*---------------------------------------------------------------------------*\
-                      Class SpalartAllmaras Declaration
+                      Class SpalartAllmarasNeg Declaration
 \*---------------------------------------------------------------------------*/
 
-class SpalartAllmaras
+class SpalartAllmarasNeg
 :
     public RASModel
 {
@@ -115,13 +115,13 @@ class SpalartAllmaras
 public:
 
     //- Runtime type information
-    TypeName("SpalartAllmaras");
+    TypeName("SpalartAllmarasNeg");
 
 
     // Constructors
 
         //- Construct from components
-        SpalartAllmaras
+        SpalartAllmarasNeg
         (
             const volScalarField& rho,
             const volVectorField& U,
@@ -131,7 +131,7 @@ public:
 
 
     //- Destructor
-    virtual ~SpalartAllmaras()
+    virtual ~SpalartAllmarasNeg()
     {}
 
 
